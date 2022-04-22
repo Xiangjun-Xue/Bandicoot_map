@@ -1,0 +1,111 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"> 
+    <meta name="apple-mobile-web-app-capable" content="yes" /> 
+    <meta name="mobile-web-app-capable" content="yes" />
+    <!-- Material Design Lite -->
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="css/style.css"/>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet'/>
+  </head>
+  <body onload="getRouteList()">
+    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+      <header class="demo-header mdl-layout__header mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title"><H4>View Route</H4></span>
+        </div>
+      </header>
+      <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+        <header class="demo-drawer-header">
+          <H3 style="text-align:center">Ship Us Safe</H3>
+          <img src="css/ShipLogo.png" class="Ship-Logo" onclick="window.location='index.html';">
+        </header>
+        <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+          <a class="mdl-navigation__link" href="addRoute.html"><i class="mdl-color-text--blue-grey-100 material-icons" role="presentation">add_road</i>Route Creation</a>
+          <a class="mdl-navigation__link" href="createPort.html"><i class="mdl-color-text--blue-grey-100 material-icons" role="presentation">add_location_alt</i>Port Creation</a>
+          <a class="mdl-navigation__link" href="createShip.html"><i class="mdl-color-text--blue-grey-100 material-icons" role="presentation">anchor</i>Ship Creation</a>
+          <a class="mdl-navigation__link" href="viewShip.html"><i class="mdl-color-text--blue-grey-100 material-icons" role="presentation">directions_boat</i>View Ships</a>
+          <a class="mdl-navigation__link" href="viewPorts.html"><i class="mdl-color-text--blue-grey-100 material-icons" role="presentation">house_siding</i>View Ports</a>
+          <a class="mdl-navigation__link" href="viewRoute.html"><i class="mdl-color-text--blue-grey-100 material-icons" role="presentation">navigation</i>View Route</a>
+          <div class="mdl-layout-spacer"></div>
+        </nav>
+      </div>
+  
+      <main class="mdl-layout__content mdl-color--grey-100" >
+      <div class="demo-charts mdl-color--grey-250 mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid"> 
+
+            <div id="firstColumn" class="mdl-cell mdl-cell--4-col">
+              <!--Route Choice-->
+              <div id= "routeChoice" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder">
+                <select class="mdl-textfield__input" id="routeToLoad" name="routeChoice" onchange="findRoute(this)">
+                  <option></option>
+                </select>
+                <label class="mdl-textfield__label" for="routeToLoad">Choose a Route</label>
+              </div>
+            </br></br></br>
+               <!--Start Date-->
+               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder not-visible" id="editStartDateDiv">
+                <input class="mdl-textfield__input" type="date" id="editStartDate" onchange= "enableButton(this)">
+                <label class="mdl-textfield__label" for="startDate">New Start Date</label>
+              </div>    
+            </br>
+              <button id= "updateDate" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect not-visible" onclick="editStartDate()">
+                Update Date
+              </button>
+            </br></br></br></br></br></br></br></br></br>     
+              <button id= "deleteRoute" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect not-visible" onclick="deleteRoute()">
+                Delete Route
+              </button>      
+
+            </div>
+            <div id="cardColumn" class="mdl-cell mdl-cell--4-col" style= " width:calc(50%); float:right" >
+
+              <!-- Square card -->
+              <div class="demo-card-square mdl-card mdl-shadow--2dp not-visible" id= "displayCard">
+                <div class="mdl-card__title mdl-card--expand" style= "background:url(css/Route.png) no-repeat #46B6AC;background-size: 30%; background-position: center;">
+                  <h2 class="mdl-card__title-text" id = "routeNameDisplay" ></h2>
+
+                </div>
+                <div class="mdl-card__supporting-text">
+                   <!--Ship-->
+                  <span id="routeShip" class= "cardDetails"></span>
+
+                  <!--Start Date-->
+                  <span id="routeStartDate" class= "cardDetails"></span>
+                  
+                  <!--Starting Port-->
+                  <span id= "routeStartPort" class= "cardDetails"></span>
+
+                   <!--Destination Port-->
+                  <span id= "routeEndPort" class= "cardDetails"></span>
+
+                  <!--Travel Time-->
+                  <span id="routeDuration" class= "cardDetails"></span>
+
+                  <!--Cost-->
+                  <span id= "routeCost" class= "cardDetails"></span>
+
+                   <!--Distance-->
+                  <span id= "routeDistance" class= "cardDetails"></span>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick=enableEdit()>
+                    Click To Change Start Date
+                  </a>
+                </div>
+              </div>
+            </div>
+      </div>
+      </main>
+      <p id="toast">Please Choose a Route from the Drop Down Menu </p>
+      <div id='map' style=" height: 40%;" class="not-visible"> 
+      </div>
+    </div>
+  <script src = "js/shared.js"></script>
+  <script src = "js/viewRoute.js"></script>
+  </body>
+</html>

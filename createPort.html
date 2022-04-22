@@ -1,0 +1,106 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"> 
+    <meta name="apple-mobile-web-app-capable" content="yes" /> 
+    <meta name="mobile-web-app-capable" content="yes" />
+    <!-- Material Design Lite -->
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="css/style.css"/>
+  </head>
+  <body onload="setUp()">
+    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+      <header class="demo-header mdl-layout__header mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title"><H4>Create Ports</H4></span>
+        </div>
+      </header>
+      <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+        <header class="demo-drawer-header">
+          <H3 style="text-align:center">Ship Us Safe</H3>
+          <img src="css/ShipLogo.png" class="Ship-Logo" onclick="window.location='index.html'">
+        </header>
+        <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+          <a class="mdl-navigation__link" href="addRoute.html"><i class="mdl-color-text--blue-grey-100 material-icons" role="presentation">add_road</i>Route Creation</a>
+          <a class="mdl-navigation__link" href="createPort.html"><i class="mdl-color-text--blue-grey-100 material-icons" role="presentation">add_location_alt</i>Port Creation</a>
+          <a class="mdl-navigation__link" href="createShip.html"><i class="mdl-color-text--blue-grey-100 material-icons" role="presentation">anchor</i>Ship Creation</a>
+          <a class="mdl-navigation__link" href="viewShip.html"><i class="mdl-color-text--blue-grey-100 material-icons" role="presentation">directions_boat</i>View Ships</a>
+          <a class="mdl-navigation__link" href="viewPorts.html"><i class="mdl-color-text--blue-grey-100 material-icons" role="presentation">house_siding</i>View Ports</a>
+          <a class="mdl-navigation__link" href="viewRoute.html"><i class="mdl-color-text--blue-grey-100 material-icons" role="presentation">navigation</i>View Route</a>
+          <div class="mdl-layout-spacer"></div>
+        </nav>
+      </div>
+  
+      <main class="mdl-layout__content mdl-color--grey-100" >
+      <div class="demo-charts mdl-color--grey-250 mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid"> 
+
+        <div id="firstColumn" class="mdl-cell mdl-cell--4-col">
+        <!-- Port Name -->
+        <form action="#">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder">
+            <input class="mdl-textfield__input" type="text" id="toSearch" onchange="checkAllEntered()"> 
+            <label class="mdl-textfield__label" for="toSearch">Search a place...</label>
+          </div>
+        </form>
+
+        <!-- Select with floating label and arrow -->
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder">
+            <select class="mdl-textfield__input" id="typePort" name="port" onchange="checkAllEntered()">
+                <option></option>
+                <option>Sea</option>
+                <option>River</option>
+                <option>Lake</option>
+                <option>Unknown</option>
+            </select>
+            <label class="mdl-textfield__label" for="typePort">Port Type</label>
+          </div>
+        <!-- Location Precision -->
+        <form action="#">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder">
+          <input class="mdl-textfield__input" type="text" id="locationPrec" onchange="checkAllEntered()"> 
+          <label class="mdl-textfield__label" for="locationPrec">Location Precision</label>
+        </div>
+        </form>
+    </div>
+      <div id="secondColumn" class="mdl-cell mdl-cell--4-col">          
+    
+        <!-- Country Selection -->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder">
+          <select class="mdl-textfield__input" id="countrySelect" onchange="checkAllEntered()">
+            <option></option>
+          </select>
+          <label class="mdl-textfield__label" for="countrySelect">Country</label>
+        </div></br></br>  
+
+        <!-- Size Of Port -->  
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder">
+          <select class="mdl-textfield__input" id="sizePort" name="size" onchange="checkAllEntered()">
+            <option></option>
+            <option>Very Big</option>
+            <option>Big</option>
+            <option>Median</option>
+            <option>Small</option>
+            <option>Very Small</option>
+            <option>Unknown</option>
+          </select>
+          <label class="mdl-textfield__label" for="sizePort">Size of the port</label>
+        </div>
+
+        </br></br>
+         <!-- Create Port Button -->
+         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary" onclick="createPort()" id= "createPortButton" disabled="disabled"> 
+          Create Port
+          </button></br>
+          <span> Please fill up all fields</span>
+
+      </div>     
+
+      </div>
+      </main>
+    </div>
+  <script src = "js/createPort.js"></script>
+  <script src = "js/shared.js"></script>
+  </body>
+</html>
