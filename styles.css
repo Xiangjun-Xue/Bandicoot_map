@@ -1,0 +1,13 @@
+/* styles.css */
+body {
+    background-image: url('https://github.com/Xiangjun-Xue/Bandicoot_map/blob/main/bandicoot_background.png'); /* Replace 'your-image.jpg' with the path to your image file */
+    background-size: cover; /* Adjust this property to control how the image is scaled */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-position: center center; /* Center the image both horizontally and vertically */
+    /* You can add more background properties and styles here */
+}
+
+/* Add any additional styles for your HTML elements */
+h1 {
+    color: #ffffff; /* Example: Set text color to white */
+}
